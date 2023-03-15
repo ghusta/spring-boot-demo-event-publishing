@@ -30,7 +30,7 @@ public class SendMailObservationListener {
     }
 
     private void sendMail(String subject, ObservationEvent observationEvent) {
-        // should end a mail...
+        // should send an email...
         log.debug("Sending a mail... ({}) (in {})", subject, Thread.currentThread().getName());
         try {
             Thread.sleep(3000);
