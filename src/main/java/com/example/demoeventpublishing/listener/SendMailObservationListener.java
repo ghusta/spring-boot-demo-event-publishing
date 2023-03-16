@@ -43,7 +43,8 @@ public class SendMailObservationListener {
         simpleMailMessage.setFrom("admin@test.com");
         simpleMailMessage.setTo("bob@test.com");
         simpleMailMessage.setSubject(subject);
-        simpleMailMessage.setText("Hello !\nObservation " + observationEvent.getObservation().id()
+        simpleMailMessage.setText("Hello !👋\n\n" +
+                "👀 Observation #" + observationEvent.getObservation().id()
                 + " got " + observationEvent.getClass().getSimpleName());
         try {
             mailSender.send(simpleMailMessage);
