@@ -5,7 +5,9 @@ import com.example.demoeventpublishing.event.ObservationEvent;
 import com.example.demoeventpublishing.event.ObservationPublishedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
-import org.springframework.mail.MailSendException;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class SendMailObservationListener {
+
+    private final JavaMailSender mailSender;
+
+    public SendMailObservationListener(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     @Async
     @EventListener(classes = ObservationEvent.class)
@@ -30,14 +38,19 @@ public class SendMailObservationListener {
     }
 
     private void sendMail(String subject, ObservationEvent observationEvent) {
-        // should send an email...
-        log.debug("Sending a mail... ({}) (in {})", subject, Thread.currentThread().getName());
+        log.debug("Sending a mail async... ({}) (in {})", subject, Thread.currentThread().getName());
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("admin@test.com");
+        simpleMailMessage.setTo("bob@test.com");
+        simpleMailMessage.setSubject(subject);
+        simpleMailMessage.setText("Hello !\nObservation " + observationEvent.getObservation().id()
+                + " got " + observationEvent.getClass().getSimpleName());
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new MailSendException(e.getMessage(), e);
+            mailSender.send(simpleMailMessage);
+            log.debug("Mail sent (in {})", Thread.currentThread().getName());
+        } catch (MailException e) {
+            log.error(e.getMessage());
         }
-        log.debug("Mail sent (in {})", Thread.currentThread().getName());
     }
 
 }

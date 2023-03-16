@@ -1,0 +1,7 @@
+services:
+  fake-smtp:
+    image: ghusta/fakesmtp:2.3
+    ports:
+      - "2525:25"
+    volumes:
+      - ./sent-emails:/var/mail
