@@ -52,6 +52,35 @@ With Maven :
 mvn spring-boot:run
 ----
 
+=== Execution log example
+
+====
+[%hardbreaks]
+2023-03-16T10:22:19.486+01:00  INFO 6240 --- [           main] c.e.d.DemoEventPublishingApplication     : Starting DemoEventPublishingApplication using Java 17.0.6 with PID 6240 (\Java\demo-event-publishing\target\classes started by g in \Java\demo-event-publishing)
+2023-03-16T10:22:19.489+01:00  INFO 6240 --- [           main] c.e.d.DemoEventPublishingApplication     : No active profile set, falling back to 1 default profile: "default"
+2023-03-16T10:22:19.868+01:00  INFO 6240 --- [           main] c.e.d.DemoEventPublishingApplication     : Started DemoEventPublishingApplication in 0.619 seconds (process running for 0.825)
+2023-03-16T10:22:19.870+01:00  INFO 6240 --- [           main] c.e.d.DemoEventPublishingApplication     : Running the app...
+2023-03-16T10:22:19.870+01:00  INFO 6240 --- [           main] c.e.d.service.MyService                  : Entering addObservation()...
+ASYNC -- It's a ObservationAddedEvent !
+[blue]#It's a ObservationAddedEvent... Content is : Nothing interesting 😴#
+[green]#It's a ObservationAddedEvent... Content is : Nothing interesting 😴#
+[red]#It's a ObservationAddedEvent... Content is : Nothing interesting 😴#
+2023-03-16T10:22:19.885+01:00  INFO 6240 --- [           main] c.e.d.service.MyService                  : Entering publishObservation()...
+ASYNC -- It's a ObservationPublishedEvent !
+[blue]#It's a ObservationPublishedEvent !#
+[green]#It's a ObservationPublishedEvent !#
+[red]#It's a ObservationPublishedEvent !#
+2023-03-16T10:22:19.886+01:00  INFO 6240 --- [           main] c.e.d.service.MyService                  : Entering removeObservation()...
+2023-03-16T10:22:19.886+01:00 DEBUG 6240 --- [         task-4] c.e.d.l.SendMailObservationListener      : Sending a mail async... (Observation published) (in task-4)
+2023-03-16T10:22:19.885+01:00 DEBUG 6240 --- [         task-2] c.e.d.l.SendMailObservationListener      : Sending a mail async... (Observation added) (in task-2)
+[blue]#It's a ObservationRemovedEvent !#
+[green]#It's a ObservationRemovedEvent !#
+[red]#It's a ObservationRemovedEvent !#
+2023-03-16T10:22:19.887+01:00 DEBUG 6240 --- [         task-6] c.e.d.l.SendMailObservationListener      : Event not managed (com.example.demoeventpublishing.event.ObservationRemovedEvent)
+2023-03-16T10:22:20.014+01:00 DEBUG 6240 --- [         task-4] c.e.d.l.SendMailObservationListener      : Mail sent (in task-4)
+2023-03-16T10:22:20.015+01:00 DEBUG 6240 --- [         task-2] c.e.d.l.SendMailObservationListener      : Mail sent (in task-2)
+====
+
 == References
 
 * Spring Boot :
