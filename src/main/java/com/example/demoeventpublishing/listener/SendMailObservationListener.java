@@ -41,6 +41,7 @@ public class SendMailObservationListener {
         log.debug("Sending a mail async... ({}) (in {})", subject, Thread.currentThread().getName());
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("admin@test.com");
+        simpleMailMessage.setReplyTo("no-reply@test.com");
         simpleMailMessage.setTo("bob@test.com");
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText("Hello !👋\n\n" +
