@@ -1,0 +1,63 @@
+= Demo for Spring Boot Application Events
+:author: Guillaume HUSTA
+:toc:
+
+== Overview
+
+Demo for testing publish/subscribe events with Spring Boot.
+
+Some subscribers are *synchronous*, others are *asynchronous* like email sending.
+
+=== Publisher
+
+One publisher publishes events.
+All these events will be subclasses of `ObservationEvent`.
+
+=== Subscribers
+
+There are 2 kinds of subscribers : synchronous and asynchronous.
+
+==== Synchronous
+
+* `ObservationEventCyanLoggerListener` prints events on console with color _cyan_
+* `ObservationEventGreenLoggerListener` prints events on console with color _green_
+* `ObservationEventRedLoggerListener` prints events on console with color _red_
+
+==== Asynchronous
+
+* `AsyncObservationEventLoggerListener` prints events on console asynchronously
+* `SendMailObservationListener` sends emails asynchronously, if SMTP server is available
+
+== How to test it
+
+=== Ensure a SMTP server is accessible
+
+Either configure `src/main/resources/application.properties` with your own SMTP server (see https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.mail[Spring Boot mail configuration]), or launch a fake SMTP server.
+
+You can do the latter with the provided link:docker-compose.yml[docker-compose.yml] file, launching a SMTP server by default on localhost, port 2525 :
+
+[source,bash]
+----
+docker compose up -d
+----
+
+The sent emails will then be accessible in the local folder `sent-emails`.
+
+=== Launch Spring Boot app
+
+With Maven :
+
+[source,bash]
+----
+mvn spring-boot:run
+----
+
+== References
+
+* Spring Boot :
+** https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.spring-application.application-events-and-listeners[Application Events and Listeners]
+** https://docs.spring.io/spring-boot/docs/current/reference/html/io.html#io.email[Sending Email]
+** https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.task-execution-and-scheduling[Task Execution and Scheduling], for asynchronous task execution (`@EnableAsync`)
+* Articles :
+** https://reflectoring.io/spring-boot-application-events-explained/[Spring Boot Application Events Explained]
+** https://howtodoinjava.com/spring-core/how-to-publish-and-listen-application-events-in-spring/[Spring Application Events]
