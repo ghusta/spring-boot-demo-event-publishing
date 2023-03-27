@@ -27,7 +27,7 @@ public class SendMailObservationListener {
 
     @Async
     @EventListener(classes = ObservationEvent.class)
-    protected void handleObservationEvent(ObservationEvent observationEvent) {
+    public void handleObservationEvent(ObservationEvent observationEvent) {
         if (observationEvent instanceof ObservationAddedEvent) {
             sendMail("Observation added", observationEvent);
         } else if (observationEvent instanceof ObservationPublishedEvent) {

@@ -17,7 +17,7 @@ public abstract class ObservationEventColoredLoggerListener {
     protected abstract String textAnsiColor();
 
     @EventListener(classes = ObservationEvent.class)
-    protected void handleObservationEvent(ObservationEvent observationEvent) {
+    public void handleObservationEvent(ObservationEvent observationEvent) {
         if (observationEvent instanceof ObservationAddedEvent) {
             System.out.println(coloredMessage("It's a ObservationAddedEvent... Content is : " + observationEvent.getObservation().title()));
         } else if (observationEvent instanceof ObservationModifiedEvent) {

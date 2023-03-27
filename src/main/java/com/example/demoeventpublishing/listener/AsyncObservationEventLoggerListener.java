@@ -14,7 +14,7 @@ public class AsyncObservationEventLoggerListener {
 
     @Async
     @EventListener(classes = ObservationEvent.class)
-    protected void handleObservationEvent(ObservationEvent observationEvent) {
+    public void handleObservationEvent(ObservationEvent observationEvent) {
         if (observationEvent instanceof ObservationAddedEvent) {
             System.out.println(PREFIX_MSG + "It's a ObservationAddedEvent !");
         } else if (observationEvent instanceof ObservationPublishedEvent) {
