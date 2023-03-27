@@ -90,3 +90,6 @@ ASYNC -- It's a ObservationPublishedEvent !
 * Articles :
 ** https://reflectoring.io/spring-boot-application-events-explained/[Spring Boot Application Events Explained]
 ** https://howtodoinjava.com/spring-core/how-to-publish-and-listen-application-events-in-spring/[Spring Application Events]
+* Issues / Mentions :
+** ⭐ https://github.com/spring-projects/spring-framework/issues/27777[Mention explicitly that @EventListener should be put on public methods] => *INVALID*
+*** Related : https://github.com/spring-projects/spring-framework/pull/26785
