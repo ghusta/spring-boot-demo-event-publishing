@@ -6,11 +6,14 @@ package com.example.demoeventpublishing.event;
  */
 public class ObservationRemovedEvent extends ObservationEvent {
 
-    private int observationId;
+    private final int observationId;
 
     public ObservationRemovedEvent(int observationId) {
         super(null);
         this.observationId = observationId;
     }
 
+    public int getObservationId() {
+        return observationId;
+    }
 }
