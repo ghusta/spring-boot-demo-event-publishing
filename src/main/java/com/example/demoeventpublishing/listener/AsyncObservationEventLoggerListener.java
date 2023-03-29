@@ -15,10 +15,11 @@ public class AsyncObservationEventLoggerListener {
     @Async
     @EventListener(classes = ObservationEvent.class)
     public void handleObservationEvent(ObservationEvent observationEvent) {
+        String threadName = Thread.currentThread().getName();
         if (observationEvent instanceof ObservationAddedEvent) {
-            System.out.println(PREFIX_MSG + "It's a ObservationAddedEvent !");
+            System.out.println(PREFIX_MSG + "It's a ObservationAddedEvent ! (in " + threadName + ")");
         } else if (observationEvent instanceof ObservationPublishedEvent) {
-            System.out.println(PREFIX_MSG + "It's a ObservationPublishedEvent !");
+            System.out.println(PREFIX_MSG + "It's a ObservationPublishedEvent ! (in " + threadName + ")");
         }
     }
 
